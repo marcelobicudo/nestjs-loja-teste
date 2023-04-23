@@ -20,19 +20,33 @@ export class UserRepository {
   }
 
   async update(id: string, userData: Partial<UserEntity>) {
-    const verifyUser = this.users.find((savedUser) => savedUser.id === id);
-
-    if (!verifyUser) {
-      throw new Error('Usuário não encontrado');
-    }
+    const user = this.searchById(id);
 
     Object.entries(userData).forEach(([key, value]) => {
       if (key === 'id') {
         return;
       }
 
-      verifyUser[key] = value;
+      user[key] = value;
     });
+
+    return user;
+  }
+
+  async delete(id: string) {
+    const user = this.searchById(id);
+
+    this.users = this.users.filter((savedUser) => savedUser.id !== id);
+
+    return user;
+  }
+
+  private searchById(id: string) {
+    const verifyUser = this.users.find((savedUser) => savedUser.id === id);
+
+    if (!verifyUser) {
+      throw new Error('Usuário não encontrado');
+    }
 
     return verifyUser;
   }

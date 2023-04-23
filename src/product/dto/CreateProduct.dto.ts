@@ -7,12 +7,16 @@ import {
   IsPositive,
   MaxLength,
   ArrayMinSize,
+  IsUUID,
 } from 'class-validator';
 import { CaracteristicaProductDTO } from './CaracteristicaProduct.dto';
 import { ImagemProductDTO } from './ImagemProduct.dto';
 import { Type } from 'class-transformer';
 
 export class CreateProductDTO {
+  @IsUUID(undefined, { message: 'ID de usuário inválido' })
+  userId: string;
+
   @IsNotEmpty({ message: 'O nome do produto não pode ser vazio' })
   nome: string;
 

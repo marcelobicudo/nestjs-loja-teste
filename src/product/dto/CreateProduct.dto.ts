@@ -5,10 +5,7 @@ import {
   IsNumber,
   ValidateNested,
   IsPositive,
-  IsDecimal,
-  NotEquals,
   MaxLength,
-  MinLength,
   ArrayMinSize,
 } from 'class-validator';
 import { CaracteristicaProductDTO } from './CaracteristicaProduct.dto';

@@ -18,4 +18,22 @@ export class UserRepository {
 
     return verifyUser !== undefined;
   }
+
+  async update(id: string, userData: Partial<UserEntity>) {
+    const verifyUser = this.users.find((savedUser) => savedUser.id === id);
+
+    if (!verifyUser) {
+      throw new Error('Usuário não encontrado');
+    }
+
+    Object.entries(userData).forEach(([key, value]) => {
+      if (key === 'id') {
+        return;
+      }
+
+      verifyUser[key] = value;
+    });
+
+    return verifyUser;
+  }
 }
